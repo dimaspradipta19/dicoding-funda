@@ -14,17 +14,17 @@ class DetailRestaurant extends StatelessWidget {
       create: (context) => DetailRestaurantProvider(
           restaurantService: RestaurantService(), id: id),
       child: Scaffold(
-        body: Consumer(
-          builder: (context, DetailRestaurantProvider detailRestaurant,
-                  child) =>
-              SafeArea(
+        body: Consumer<DetailRestaurantProvider>(
+          builder:
+              (context, DetailRestaurantProvider detailRestaurant, child) =>
+                  SafeArea(
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(20.0),
                           bottomRight: Radius.circular(20.0),
                         ),
@@ -84,7 +84,8 @@ class DetailRestaurant extends StatelessWidget {
                             ),
                             Text(
                               // "Restaurant rating",
-                              "detail.detail.restaurant.rating.toString()",
+                              detailRestaurant.detail.restaurant.rating
+                                  .toString(),
                               style: myTextTheme.bodyLarge!
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
@@ -93,7 +94,7 @@ class DetailRestaurant extends StatelessWidget {
                         const SizedBox(height: 12.0),
                         Text(
                           // "restaurant.description!"
-                          " detail.detail.restaurant.description",
+                          detailRestaurant.detail.restaurant.description,
                           textAlign: TextAlign.justify,
                           style: myTextTheme.bodyText1,
                         ),
@@ -123,8 +124,8 @@ class DetailRestaurant extends StatelessWidget {
                                         const SizedBox(height: 20),
                                         const FlutterLogo(size: 60.0),
                                         const SizedBox(height: 20),
-                                        Text(
-                                            "restaurant.menus.foods[index].name"),
+                                        Text(detailRestaurant.detail.restaurant
+                                            .menus.foods[index].name),
                                         // Text(detail.detail.restaurant.menus
                                         //     .foods[index].name),
                                       ],
@@ -161,10 +162,10 @@ class DetailRestaurant extends StatelessWidget {
                                         const SizedBox(height: 20),
                                         const FlutterLogo(size: 60.0),
                                         const SizedBox(height: 20),
-                                        Text(
-                                            "restaurant.menus.drinks[index].name"),
-                                        // Text(detail.detail.restaurant.menus
-                                        //     .drinks[index].name),
+                                        // Text(
+                                        //     "restaurant.menus.drinks[index].name"),
+                                        Text(detailRestaurant.detail.restaurant
+                                            .menus.drinks[index].name),
                                       ],
                                     ),
                                   ),
