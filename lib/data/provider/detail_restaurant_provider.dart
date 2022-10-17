@@ -18,15 +18,22 @@ class DetailRestaurantProvider extends ChangeNotifier {
 
   String get message => _message;
   ResultState get state => _state;
-  DetailRestaurantModel get detail => _detailRestaurantModel;
+  DetailRestaurantModel get detailRestaurant => _detailRestaurantModel;
 
   Future<dynamic> _fetchDetailRestaurant(String id) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
-      final detail = await RestaurantService().getDetailRestaurant(id);
-
-      return _detailRestaurantModel = detail;
+      final detail = await restaurantService.getDetailRestaurant(id);
+      if (detail.error!) {
+        _state = ResultState.noData;
+        notifyListeners();
+        return _message = "Empty Data";
+      } else {
+        _state == ResultState.hasData;
+        notifyListeners();
+        return _detailRestaurantModel = detail;
+      }
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();

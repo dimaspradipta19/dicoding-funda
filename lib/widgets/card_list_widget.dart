@@ -13,16 +13,18 @@ class CardListWidget extends StatefulWidget {
 }
 
 class _CardListWidgetState extends State<CardListWidget> {
+  // final GlobalKey<NavigatorState> navigatorKey =
+  //     GlobalKey(debugLabel: "Main Navigator");
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      // key: navigatorKey,
       onTap: () {
+        print(widget.restaurant.id);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) {
-              return DetailRestaurant(id: widget.restaurant.id);
-            },
+            builder: (context) => DetailRestaurant(id: widget.restaurant.id),
           ),
         );
       },
