@@ -1,5 +1,6 @@
 import 'package:dicoding_restaurant_app/common/styles.dart';
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:dicoding_restaurant_app/screens/search_restaurant_page.dart';
 import 'package:dicoding_restaurant_app/widgets/card_list_widget.dart';
 import 'package:dicoding_restaurant_app/widgets/title_home_page_widget.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +56,16 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Form(
                           child: TextFormField(
+                            readOnly: true,
+                            onTap: () =>
+                                Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return const SearchRestaurantPage();
+                              },
+                            )),
                             decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.search_outlined),
+
+                              prefixIcon: Icon(Icons.search_outlined, color: primaryColor,),
                               border: InputBorder.none,
                               hintText: "Search",
                             ),

@@ -13,7 +13,6 @@ class DetailRestaurantProvider extends ChangeNotifier {
     state = ResultState.loading;
     notifyListeners();
     detailRestaurantModel = await service.getDetailRestaurant(id);
-
     if (detailRestaurantModel == null) {
       state = ResultState.noData;
       notifyListeners();
@@ -21,16 +20,7 @@ class DetailRestaurantProvider extends ChangeNotifier {
       state = ResultState.hasData;
       notifyListeners();
     }
-    // print(detailRestaurantModel);
-    // if (result != null) {
-    //   detailRestaurantModel = result;
-    //   notifyListeners();
-    // } else {
-    //   print("Error");
-    //   print(detailRestaurantModel?.restaurant.city ?? "Kosong");
-    //   notifyListeners();
-    // }
     notifyListeners();
-    return detailRestaurantModel;
+    // return detailRestaurantModel;
   }
 }

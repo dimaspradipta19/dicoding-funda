@@ -62,13 +62,32 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            // "detail.detail.restaurant.name",
-                            detailRestaurant
-                                    .detailRestaurantModel?.restaurant.name ??
-                                "Resto Name",
-                            style: myTextTheme.displaySmall!
-                                .copyWith(fontSize: 24),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  detailRestaurant.detailRestaurantModel
+                                          ?.restaurant.name ??
+                                      "Resto Name",
+                                  style: myTextTheme.displaySmall!
+                                      .copyWith(fontSize: 36),
+                                ),
+                              ),
+                              const Icon(
+                                Icons.star_rounded,
+                                color: primaryColor,
+                                size: 30,
+                              ),
+                              const SizedBox(width: 4.0),
+                              Text(
+                                detailRestaurant.detailRestaurantModel
+                                        ?.restaurant.rating
+                                        .toString() ??
+                                    "Rating",
+                                style: myTextTheme.headline5!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 12.0),
                           Row(
@@ -76,37 +95,55 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                               const Icon(
                                 Icons.location_on_outlined,
                                 color: primaryColor,
+                                size: 30,
                               ),
-                              Text(
-                                detailRestaurant.detailRestaurantModel
-                                        ?.restaurant.city ??
-                                    "City Resto",
-                                style: myTextTheme.bodyLarge!
-                                    .copyWith(fontSize: 18.0),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12.0),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.star_rounded,
-                                color: primaryColor,
-                              ),
-                              Text(
-                                // "Restaurant rating",
-                                detailRestaurant.detailRestaurantModel
-                                        ?.restaurant.rating
-                                        .toString() ??
-                                    "Rating",
-                                style: myTextTheme.bodyLarge!
-                                    .copyWith(fontWeight: FontWeight.bold),
+                              const SizedBox(width: 8),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    detailRestaurant.detailRestaurantModel
+                                            ?.restaurant.address ??
+                                        "City Resto",
+                                    style: myTextTheme.bodyLarge!
+                                        .copyWith(fontSize: 16.0),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    detailRestaurant.detailRestaurantModel
+                                            ?.restaurant.city ??
+                                        "City Resto",
+                                    style: myTextTheme.bodyLarge!
+                                        .copyWith(fontSize: 16.0),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                          const SizedBox(height: 12.0),
+                          const SizedBox(height: 24.0),
+                          SizedBox(
+                            height: 50,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: detailRestaurant.detailRestaurantModel!
+                                  .restaurant.categories.length,
+                              itemBuilder: (context, index) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Chip(
+                                  padding: const EdgeInsets.all(10),
+                                  backgroundColor: primaryColor,
+                                  label: Text(
+                                    detailRestaurant.detailRestaurantModel!
+                                        .restaurant.categories[index].name,
+                                    style: const TextStyle(color: whiteColor),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 24.0),
                           Text(
-                            // "restaurant.description!"
                             detailRestaurant.detailRestaurantModel?.restaurant
                                     .description ??
                                 "decs",
@@ -122,7 +159,8 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                           SizedBox(
                             height: 150,
                             child: ListView.builder(
-                              itemCount: detailRestaurant.detailRestaurantModel!.restaurant.menus.foods.length,
+                              itemCount: detailRestaurant.detailRestaurantModel!
+                                  .restaurant.menus.foods.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Padding(
@@ -162,7 +200,8 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                           SizedBox(
                             height: 150,
                             child: ListView.builder(
-                              itemCount: detailRestaurant.detailRestaurantModel!.restaurant.menus.drinks.length,
+                              itemCount: detailRestaurant.detailRestaurantModel!
+                                  .restaurant.menus.drinks.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Padding(
@@ -194,6 +233,54 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                             ),
                           ),
                           const SizedBox(height: 12.0),
+                          Text(
+                            "Reviews",
+                            style: myTextTheme.headline6,
+                          ),
+                          // MINUMAN
+                          SizedBox(
+                            height: 130,
+                            child: ListView.builder(
+                              itemCount: detailRestaurant.detailRestaurantModel!
+                                  .restaurant.customerReviews.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Nama : ${detailRestaurant
+                                            .detailRestaurantModel!
+                                            .restaurant
+                                            .customerReviews[index]
+                                            .name}", style: myTextTheme.bodyLarge,),
+                                          Text(detailRestaurant
+                                            .detailRestaurantModel!
+                                            .restaurant
+                                            .customerReviews[index]
+                                            .date),
+                                          Text(detailRestaurant
+                                            .detailRestaurantModel!
+                                            .restaurant
+                                            .customerReviews[index]
+                                            .review),
+                                        ],
+                                      ),
+                                    )
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
