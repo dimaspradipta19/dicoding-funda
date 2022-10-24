@@ -23,8 +23,6 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
 
   @override
   Widget build(BuildContext context) {
-    final dataResto =
-        Provider.of<SearchRestaurantProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -110,13 +108,15 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
                                                 Text(
                                                   searchResto
                                                       .result[index].name,
-                                                  style: myTextTheme.headline4,
+                                                  style: myTextTheme.headline5,
                                                 ),
+                                                const SizedBox(height: 8),
                                                 Text(
                                                     searchResto.result[index]
                                                         .description,
                                                     overflow:
                                                         TextOverflow.ellipsis),
+                                                const SizedBox(height: 8),
                                                 Row(
                                                   children: [
                                                     const Icon(
@@ -129,6 +129,7 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
                                                         .result[index].city),
                                                   ],
                                                 ),
+                                                const SizedBox(height: 8),
                                                 Row(
                                                   children: [
                                                     const Icon(
