@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class RestaurantService {
   static const String _baseUrl = "https://restaurant-api.dicoding.dev/";
   static const String _list = "list";
-  static const String _detailRestaurant = "detail/";
+  // static const String _detailRestaurant = "detail/";
 
   // GET listRestaurant
   Future<ListRestaurantModel> getListRestaurant() async {
@@ -22,11 +22,13 @@ class RestaurantService {
 
   // GET detailRestaurant
   Future<DetailRestaurantModel> getDetailRestaurant(String id) async {
-    final response =
-        await http.get(Uri.parse(_baseUrl + _detailRestaurant + id));
+    final response = await http
+        .get(Uri.parse("https://restaurant-api.dicoding.dev/detail/$id"));
 
     if (response.statusCode == 200) {
-      return DetailRestaurantModel.fromJson(jsonDecode(response.body));
+      final decodedData = jsonDecode(response.body);
+      final result = DetailRestaurantModel.fromJson(decodedData);
+      return result;
     } else {
       throw Exception("Failed get detail restaurant");
     }

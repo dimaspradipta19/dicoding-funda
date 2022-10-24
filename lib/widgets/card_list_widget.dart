@@ -1,7 +1,9 @@
 import 'package:dicoding_restaurant_app/models/list_restaurant_model.dart';
 import 'package:dicoding_restaurant_app/screens/detail_restaurant_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../common/styles.dart';
+import '../data/provider/detail_restaurant_provider.dart';
 
 class CardListWidget extends StatefulWidget {
   const CardListWidget({super.key, required this.restaurant});
@@ -13,18 +15,16 @@ class CardListWidget extends StatefulWidget {
 }
 
 class _CardListWidgetState extends State<CardListWidget> {
-  // final GlobalKey<NavigatorState> navigatorKey =
-  //     GlobalKey(debugLabel: "Main Navigator");
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // key: navigatorKey,
       onTap: () {
-        print(widget.restaurant.id);
+        Provider.of<DetailRestaurantProvider>(context, listen: false)
+            .getDetail(widget.restaurant.id);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailRestaurant(id: widget.restaurant.id),
+            builder: (context) => DetailRestaurant(idResto: widget.restaurant.id),
           ),
         );
       },

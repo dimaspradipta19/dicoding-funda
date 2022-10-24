@@ -71,46 +71,38 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Expanded(
-              child: ChangeNotifierProvider(
-                create: (context) =>
-                    RestaurantProvider(restaurantService: RestaurantService()),
-                child: Consumer<RestaurantProvider>(
-                  builder: (context, RestaurantProvider dataListRestaurant, _) {
-                    if (dataListRestaurant.state == ResultState.loading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (dataListRestaurant.state ==
-                        ResultState.hasData) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: dataListRestaurant
-                            .listRestaurantModel.restaurants.length,
-                        itemBuilder: (context, index) {
-                          final listRestaurant = dataListRestaurant
-                              .listRestaurantModel.restaurants[index];
-                          return CardListWidget(restaurant: listRestaurant);
-                        },
-                      );
-                    } else if (dataListRestaurant.state == ResultState.noData) {
-                      return Center(
-                        child: Material(
-                          child: Text(dataListRestaurant.message),
-                        ),
-                      );
-                    } else if (dataListRestaurant.state == ResultState.error) {
-                      return Center(
-                        child: Material(
-                          child: Text(dataListRestaurant.message),
-                        ),
-                      );
-                    } else {
-                      return const Center(
-                        child: Text(""),
-                      );
-                    }
-                  },
-                ),
+              child: Consumer<RestaurantProvider>(
+                builder: (context, RestaurantProvider dataListRestaurant, _) {
+                  if (dataListRestaurant.state == ResultState.loading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (dataListRestaurant.state ==
+                      ResultState.hasData) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: dataListRestaurant
+                          .listRestaurantModel.restaurants.length,
+                      itemBuilder: (context, index) {
+                        final listRestaurant = dataListRestaurant
+                            .listRestaurantModel.restaurants[index];
+                        return CardListWidget(restaurant: listRestaurant);
+                      },
+                    );
+                  } else if (dataListRestaurant.state == ResultState.noData) {
+                    return Center(
+                      child: Text(dataListRestaurant.message),
+                    );
+                  } else if (dataListRestaurant.state == ResultState.error) {
+                    return Center(
+                      child: Text(dataListRestaurant.message),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text(""),
+                    );
+                  }
+                },
               ),
             ),
           ],
