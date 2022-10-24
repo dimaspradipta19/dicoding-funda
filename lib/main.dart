@@ -1,7 +1,6 @@
 import 'package:dicoding_restaurant_app/common/styles.dart';
 import 'package:dicoding_restaurant_app/data/provider/detail_restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
-import 'package:dicoding_restaurant_app/data/service/restaurant_service.dart';
 import 'package:dicoding_restaurant_app/screens/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +20,7 @@ class MyApp extends StatelessWidget {
           create: (context) => DetailRestaurantProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) =>
-              RestaurantProvider(restaurantService: RestaurantService()),
+          create: (context) => ListRestaurantProvider(),
         )
       ],
       child: MaterialApp(

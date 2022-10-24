@@ -1,7 +1,5 @@
 import 'package:dicoding_restaurant_app/common/styles.dart';
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
-import 'package:dicoding_restaurant_app/data/service/restaurant_service.dart';
-import 'package:dicoding_restaurant_app/models/list_restaurant_model.dart';
 import 'package:dicoding_restaurant_app/widgets/card_list_widget.dart';
 import 'package:dicoding_restaurant_app/widgets/title_home_page_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +13,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<ListRestaurantModel> _listRestaurant;
-
   @override
   void initState() {
     super.initState();
-    _listRestaurant = RestaurantService().getListRestaurant();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<ListRestaurantProvider>(context, listen: false).getList();
+    });
   }
 
   @override
@@ -71,31 +69,29 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Expanded(
-              child: Consumer<RestaurantProvider>(
-                builder: (context, RestaurantProvider dataListRestaurant, _) {
+              child: Consumer<ListRestaurantProvider>(
+                builder:
+                    (context, ListRestaurantProvider dataListRestaurant, _) {
                   if (dataListRestaurant.state == ResultState.loading) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (dataListRestaurant.state ==
-                      ResultState.hasData) {
+                  } else if (dataListRestaurant.state == ResultState.hasData) {
                     return ListView.builder(
                       shrinkWrap: true,
-                      itemCount: dataListRestaurant
-                          .listRestaurantModel.restaurants.length,
+                      itemCount: dataListRestaurant.result.length,
                       itemBuilder: (context, index) {
-                        final listRestaurant = dataListRestaurant
-                            .listRestaurantModel.restaurants[index];
+                        final listRestaurant = dataListRestaurant.result[index];
                         return CardListWidget(restaurant: listRestaurant);
                       },
                     );
                   } else if (dataListRestaurant.state == ResultState.noData) {
-                    return Center(
-                      child: Text(dataListRestaurant.message),
+                    return const Center(
+                      child: Text("dataListRestaurant.message"),
                     );
                   } else if (dataListRestaurant.state == ResultState.error) {
-                    return Center(
-                      child: Text(dataListRestaurant.message),
+                    return const Center(
+                      child: Text("dataListRestaurant.message"),
                     );
                   } else {
                     return const Center(

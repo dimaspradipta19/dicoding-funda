@@ -10,8 +10,17 @@ class DetailRestaurantProvider extends ChangeNotifier {
   ResultState state = ResultState.noData;
 
   Future<dynamic> getDetail(String id) async {
+    state = ResultState.loading;
+    notifyListeners();
     detailRestaurantModel = await service.getDetailRestaurant(id);
 
+    if (detailRestaurantModel == null) {
+      state = ResultState.noData;
+      notifyListeners();
+    } else {
+      state = ResultState.hasData;
+      notifyListeners();
+    }
     // print(detailRestaurantModel);
     // if (result != null) {
     //   detailRestaurantModel = result;

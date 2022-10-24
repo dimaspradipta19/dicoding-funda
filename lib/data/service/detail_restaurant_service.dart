@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dicoding_restaurant_app/models/detail_restaurant_model.dart';
 import 'package:http/http.dart' as http;
@@ -16,10 +17,10 @@ class DetailRestaurantService {
         result = DetailRestaurantModel.fromJson(decodeData);
         return result;
       } else {
-        print("Error");
+        log("Error");
       }
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
     return result;
   }
