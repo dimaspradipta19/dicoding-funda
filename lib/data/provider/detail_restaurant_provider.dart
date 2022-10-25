@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/models/detail_restaurant_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,17 +12,23 @@ class DetailRestaurantProvider extends ChangeNotifier {
   ResultState state = ResultState.noData;
 
   Future<dynamic> getDetail(String id) async {
-    state = ResultState.loading;
-    notifyListeners();
-    detailRestaurantModel = await service.getDetailRestaurant(id);
-    if (detailRestaurantModel == null) {
-      state = ResultState.noData;
+    try {
+      state = ResultState.loading;
       notifyListeners();
-    } else {
-      state = ResultState.hasData;
+      detailRestaurantModel = await service.getDetailRestaurant(id);
+      if (detailRestaurantModel == null) {
+        state = ResultState.noData;
+        notifyListeners();
+      } else {
+        state = ResultState.hasData;
+        notifyListeners();
+      }
       notifyListeners();
+      // return detailRestaurantModel;
+    } on SocketException {
+      throw Exception("Gagal menyambung server");
+    } catch (e) {
+      rethrow;
     }
-    notifyListeners();
-    // return detailRestaurantModel;
   }
 }

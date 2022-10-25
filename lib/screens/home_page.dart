@@ -57,15 +57,19 @@ class _HomePageState extends State<HomePage> {
                         child: Form(
                           child: TextFormField(
                             readOnly: true,
-                            onTap: () =>
-                                Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return const SearchRestaurantPage();
-                              },
-                            )),
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const SearchRestaurantPage();
+                                },
+                              ),
+                            ),
                             decoration: const InputDecoration(
-
-                              prefixIcon: Icon(Icons.search_outlined, color: primaryColor,),
+                              prefixIcon: Icon(
+                                Icons.search_outlined,
+                                color: primaryColor,
+                              ),
                               border: InputBorder.none,
                               hintText: "Search",
                             ),
@@ -96,15 +100,15 @@ class _HomePageState extends State<HomePage> {
                     );
                   } else if (dataListRestaurant.state == ResultState.noData) {
                     return const Center(
-                      child: Text("dataListRestaurant.message"),
+                      child: Text("Gagal mengambil data"),
                     );
                   } else if (dataListRestaurant.state == ResultState.error) {
                     return const Center(
-                      child: Text("dataListRestaurant.message"),
+                      child: Text("Error"),
                     );
                   } else {
                     return const Center(
-                      child: Text(""),
+                      child: Text("Kosong"),
                     );
                   }
                 },

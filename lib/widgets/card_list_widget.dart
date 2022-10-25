@@ -24,7 +24,8 @@ class _CardListWidgetState extends State<CardListWidget> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailRestaurant(idResto: widget.restaurant.id),
+            builder: (context) =>
+                DetailRestaurant(idResto: widget.restaurant.id),
           ),
         );
       },
@@ -77,14 +78,18 @@ class _CardListWidgetState extends State<CardListWidget> {
                   flex: 2,
                   child: Row(
                     children: [
-                      const Icon(
-                        Icons.star_rounded,
-                        color: primaryColor,
+                      const Expanded(
+                        child: Icon(
+                          Icons.star_rounded,
+                          color: primaryColor,
+                        ),
                       ),
-                      Text(
-                        "${widget.restaurant.rating}/5",
-                        style: myTextTheme.bodyLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
+                      Expanded(
+                        child: Text(
+                          "${widget.restaurant.rating}/5",
+                          style: myTextTheme.bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),

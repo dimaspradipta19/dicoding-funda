@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/data/service/search_restaurant_service.dart';
 import 'package:dicoding_restaurant_app/models/search_restaurant_model.dart';
@@ -9,16 +11,22 @@ class SearchRestaurantProvider with ChangeNotifier {
   ResultState state = ResultState.noData;
 
   void getSearch(String namaResto) async {
-    state = ResultState.loading;
-    notifyListeners();
-    result = await service.getSearchRestaurant(namaResto) ?? [];
-    if (result == []) {
-      state = ResultState.noData;
+    try {
+      state = ResultState.loading;
       notifyListeners();
-    } else {
-      state = ResultState.hasData;
+      result = await service.getSearchRestaurant(namaResto) ?? [];
+      if (result == []) {
+        state = ResultState.noData;
+        notifyListeners();
+      } else {
+        state = ResultState.hasData;
+        notifyListeners();
+      }
       notifyListeners();
+    } on SocketException {
+      throw Exception("Gagal menyambung server");
+    } catch (e) {
+      rethrow;
     }
-    notifyListeners();
   }
 }

@@ -248,35 +248,34 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
-                                    width: 300,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Nama : ${detailRestaurant
-                                            .detailRestaurantModel!
-                                            .restaurant
-                                            .customerReviews[index]
-                                            .name}", style: myTextTheme.bodyLarge,),
-                                          Text(detailRestaurant
-                                            .detailRestaurantModel!
-                                            .restaurant
-                                            .customerReviews[index]
-                                            .date),
-                                          Text(detailRestaurant
-                                            .detailRestaurantModel!
-                                            .restaurant
-                                            .customerReviews[index]
-                                            .review),
-                                        ],
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
-                                    )
-                                  ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Nama : ${detailRestaurant.detailRestaurantModel!.restaurant.customerReviews[index].name}",
+                                              style: myTextTheme.bodyLarge,
+                                            ),
+                                            Text(detailRestaurant
+                                                .detailRestaurantModel!
+                                                .restaurant
+                                                .customerReviews[index]
+                                                .date),
+                                            Text(detailRestaurant
+                                                .detailRestaurantModel!
+                                                .restaurant
+                                                .customerReviews[index]
+                                                .review),
+                                          ],
+                                        ),
+                                      )),
                                 );
                               },
                             ),
@@ -289,11 +288,11 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
               ),
             );
           } else if (detailRestaurant.state == ResultState.noData) {
-            return const Text("No Data");
+            return const Center(child:  Text("Gagal terhubung"));
           } else if (detailRestaurant.state == ResultState.error) {
             return const Text("Error");
           } else {
-            return const Text("");
+            return const Text("Kosong");
           }
         },
       ),
@@ -321,13 +320,19 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                 onPressed: () {},
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.add,
+                    const Expanded(
+                      child: Icon(
+                        Icons.add,
+                      ),
                     ),
-                    const SizedBox(
-                      width: 12,
+                    const Expanded(
+                      child: SizedBox(
+                        width: 12,
+                      ),
                     ),
-                    Text("RESERVASI", style: myTextTheme.button),
+                    Expanded(
+                        flex: 5,
+                        child: Text("RESERVASI", style: myTextTheme.button)),
                   ],
                 ),
               ),
