@@ -105,9 +105,9 @@ class _HomePageState extends State<HomePage> {
                             shrinkWrap: true,
                             itemCount: dataListRestaurant.result.length,
                             itemBuilder: (context, index) {
-                              final listRestaurant =
-                                  dataListRestaurant.result[index];
-                              return CardListWidget(restaurant: listRestaurant);
+                              // final listRestaurant =
+                              //     dataListRestaurant.result[index];
+                              return CardListWidget(restaurant: dataListRestaurant.result[index]);
                             },
                           );
                         } else if (dataListRestaurant.state ==
