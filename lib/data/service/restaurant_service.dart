@@ -22,28 +22,4 @@ class RestaurantService {
       return null;
     }
   }
-  // GET listRestaurant
-  // Future<ListRestaurantModel> getListRestaurant() async {
-  //   final response = await http.get(Uri.parse(_baseUrl + _list));
-
-  //   if (response.statusCode == 200) {
-  //     return ListRestaurantModel.fromJson(jsonDecode(response.body));
-  //   } else {
-  //     throw Exception("Failed to load List Restaurant");
-  //   }
-  // }
-
-  // GET detailRestaurant
-  // Future<DetailRestaurantModel> getDetailRestaurant(String id) async {
-  //   final response = await http
-  //       .get(Uri.parse("https://restaurant-api.dicoding.dev/detail/$id"));
-
-  //   if (response.statusCode == 200) {
-  //     final decodedData = jsonDecode(response.body);
-  //     final result = DetailRestaurantModel.fromJson(decodedData);
-  //     return result;
-  //   } else {
-  //     throw Exception("Failed get detail restaurant");
-  //   }
-  // }
 }

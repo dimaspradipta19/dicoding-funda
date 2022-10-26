@@ -1,7 +1,9 @@
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/search_restaurant_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
+import '../common/internet_not_connected.dart';
 import '../common/styles.dart';
 
 class SearchRestaurantPage extends StatefulWidget {
@@ -82,76 +84,115 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
                               ? const Center(
                                   child: Text("No Data Found"),
                                 )
-                              : ListView.builder(
-                                  itemCount: searchResto.result.length,
-                                  itemBuilder: (context, index) {
-                                    return Card(
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Image.network(
-                                              "https://restaurant-api.dicoding.dev/images/medium/${searchResto.result[index].pictureId}",
+                              : searchResto.state == ResultState.hasData
+                                  ? ListView.builder(
+                                      itemCount: searchResto.result.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            Visibility(
+                                              visible: Provider.of<
+                                                          InternetConnectionStatus>(
+                                                      context) ==
+                                                  InternetConnectionStatus
+                                                      .disconnected,
+                                              child:
+                                                  const InternetNotAvailable(),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  searchResto
-                                                      .result[index].name,
-                                                  style: myTextTheme.headline5,
-                                                ),
-                                                const SizedBox(height: 8),
-                                                Text(
-                                                    searchResto.result[index]
-                                                        .description,
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                                const SizedBox(height: 8),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons
-                                                          .local_dining_rounded,
-                                                      size: 30,
-                                                      color: primaryColor,
+                                            Provider.of<InternetConnectionStatus>(
+                                                        context) ==
+                                                    InternetConnectionStatus
+                                                        .disconnected
+                                                ? const Text(
+                                                    "check your internet!")
+                                                : Card(
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Image.network(
+                                                            "https://restaurant-api.dicoding.dev/images/medium/${searchResto.result[index].pictureId}",
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                searchResto
+                                                                    .result[
+                                                                        index]
+                                                                    .name,
+                                                                style: myTextTheme
+                                                                    .headline5,
+                                                              ),
+                                                              const SizedBox(
+                                                                  height: 8),
+                                                              Text(
+                                                                  searchResto
+                                                                      .result[
+                                                                          index]
+                                                                      .description,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis),
+                                                              const SizedBox(
+                                                                  height: 8),
+                                                              Row(
+                                                                children: [
+                                                                  const Icon(
+                                                                    Icons
+                                                                        .local_dining_rounded,
+                                                                    size: 30,
+                                                                    color:
+                                                                        primaryColor,
+                                                                  ),
+                                                                  Text(searchResto
+                                                                      .result[
+                                                                          index]
+                                                                      .city),
+                                                                ],
+                                                              ),
+                                                              const SizedBox(
+                                                                  height: 8),
+                                                              Row(
+                                                                children: [
+                                                                  const Icon(
+                                                                    Icons
+                                                                        .star_rounded,
+                                                                    size: 30,
+                                                                    color:
+                                                                        primaryColor,
+                                                                  ),
+                                                                  Text(
+                                                                    searchResto
+                                                                        .result[
+                                                                            index]
+                                                                        .rating
+                                                                        .toString(),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(searchResto
-                                                        .result[index].city),
-                                                  ],
-                                                ),
-                                                const SizedBox(height: 8),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.star_rounded,
-                                                      size: 30,
-                                                      color: primaryColor,
-                                                    ),
-                                                    Text(
-                                                      searchResto
-                                                          .result[index].rating
-                                                          .toString(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                                                  ),
+                                          ],
+                                        );
+                                      },
+                                    )
+                                  : const Text("Error"),
                 ),
               ),
             ],

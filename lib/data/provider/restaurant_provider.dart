@@ -18,13 +18,16 @@ class ListRestaurantProvider extends ChangeNotifier {
       result = await service.getListRestaurant() ?? [];
       if (result == []) {
         state = ResultState.noData;
+        notifyListeners();
       } else {
         state = ResultState.hasData;
+        notifyListeners();
       }
       notifyListeners();
     } on SocketException {
       throw Exception("Gagal menyambung server");
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
       rethrow;
     }

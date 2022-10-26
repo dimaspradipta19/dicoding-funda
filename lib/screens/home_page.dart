@@ -1,9 +1,11 @@
+import 'package:dicoding_restaurant_app/common/internet_not_connected.dart';
 import 'package:dicoding_restaurant_app/common/styles.dart';
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/screens/search_restaurant_page.dart';
 import 'package:dicoding_restaurant_app/widgets/card_list_widget.dart';
 import 'package:dicoding_restaurant_app/widgets/title_home_page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -81,39 +83,51 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            Expanded(
-              child: Consumer<ListRestaurantProvider>(
-                builder:
-                    (context, ListRestaurantProvider dataListRestaurant, _) {
-                  if (dataListRestaurant.state == ResultState.loading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (dataListRestaurant.state == ResultState.hasData) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: dataListRestaurant.result.length,
-                      itemBuilder: (context, index) {
-                        final listRestaurant = dataListRestaurant.result[index];
-                        return CardListWidget(restaurant: listRestaurant);
-                      },
-                    );
-                  } else if (dataListRestaurant.state == ResultState.noData) {
-                    return const Center(
-                      child: Text("Gagal mengambil data"),
-                    );
-                  } else if (dataListRestaurant.state == ResultState.error) {
-                    return const Center(
-                      child: Text("Error"),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text("Kosong"),
-                    );
-                  }
-                },
-              ),
+            Visibility(
+              visible: Provider.of<InternetConnectionStatus>(context) ==
+                  InternetConnectionStatus.disconnected,
+              child: const InternetNotAvailable(),
             ),
+            Provider.of<InternetConnectionStatus>(context) ==
+                    InternetConnectionStatus.disconnected
+                ? const Text("check your internet!")
+                : Expanded(
+                    child: Consumer<ListRestaurantProvider>(
+                      builder: (context,
+                          ListRestaurantProvider dataListRestaurant, _) {
+                        if (dataListRestaurant.state == ResultState.loading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (dataListRestaurant.state ==
+                            ResultState.hasData) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: dataListRestaurant.result.length,
+                            itemBuilder: (context, index) {
+                              final listRestaurant =
+                                  dataListRestaurant.result[index];
+                              return CardListWidget(restaurant: listRestaurant);
+                            },
+                          );
+                        } else if (dataListRestaurant.state ==
+                            ResultState.noData) {
+                          return const Center(
+                            child: Text("Gagal mengambil data"),
+                          );
+                        } else if (dataListRestaurant.state ==
+                            ResultState.error) {
+                          return const Center(
+                            child: Text("Error"),
+                          );
+                        } else {
+                          return const Center(
+                            child: Text("Kosong"),
+                          );
+                        }
+                      },
+                    ),
+                  ),
           ],
         ),
       ),

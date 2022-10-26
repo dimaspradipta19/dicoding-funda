@@ -4,6 +4,7 @@ import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/search_restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/screens/splash_page.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -27,14 +28,20 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchRestaurantProvider(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Restaurant App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          textTheme: myTextTheme,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+      child: StreamProvider<InternetConnectionStatus>(
+        initialData: InternetConnectionStatus.connected,
+        create: (_) {
+          return InternetConnectionChecker().onStatusChange;
+        },
+        child: MaterialApp(
+          title: 'Restaurant App',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            textTheme: myTextTheme,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: const SplashPage(),
         ),
-        home: const SplashPage(),
       ),
     );
   }
