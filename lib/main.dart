@@ -1,13 +1,28 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:dicoding_restaurant_app/common/navigation.dart';
 import 'package:dicoding_restaurant_app/common/styles.dart';
 import 'package:dicoding_restaurant_app/data/provider/detail_restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:dicoding_restaurant_app/data/provider/scheduling_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/search_restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/screens/splash_page.dart';
+import 'package:dicoding_restaurant_app/utils/background_services.dart';
+import 'package:dicoding_restaurant_app/utils/notification_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+  _service.initializeIsolate();
+
+  await AndroidAlarmManager.initialize();
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
   runApp(const MyApp());
 }
 
@@ -27,6 +42,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SearchRestaurantProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => SchedulingProvider(),
+        ),
       ],
       child: StreamProvider<InternetConnectionStatus>(
         initialData: InternetConnectionStatus.connected,
@@ -42,6 +60,7 @@ class MyApp extends StatelessWidget {
           ),
           home: const SplashPage(),
           debugShowCheckedModeBanner: false,
+          navigatorKey: navigatorKey,
         ),
       ),
     );

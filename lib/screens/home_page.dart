@@ -153,8 +153,6 @@ class HomeScreen extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: dataListRestaurant.result.length,
                           itemBuilder: (context, index) {
-                            // final listRestaurant =
-                            //     dataListRestaurant.result[index];
                             return CardListWidget(
                                 restaurant: dataListRestaurant.result[index]);
                           },

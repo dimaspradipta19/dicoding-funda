@@ -11,6 +11,7 @@ class ListRestaurantProvider extends ChangeNotifier {
   List<Restaurant> result = [];
   ResultState state = ResultState.noData;
 
+  // cara alterra
   void getList() async {
     try {
       state = ResultState.loading;
@@ -32,4 +33,27 @@ class ListRestaurantProvider extends ChangeNotifier {
       rethrow;
     }
   }
+
+  // cara dicoding
+  // void getList() async {
+  //   try {
+  //     state = ResultState.loading;
+  //     notifyListeners();
+  //     final result = await service.getListRestaurant();
+  //     if (result.restaurants.isNotEmpty) {
+  //       state = ResultState.hasData;
+  //       notifyListeners();
+  //     } else {
+  //       state = ResultState.noData;
+  //       notifyListeners();
+  //     }
+  //     notifyListeners();
+  //   } on SocketException {
+  //     throw Exception("Gagal menyambung server");
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print(e.toString());
+  //     rethrow;
+  //   }
+  // }
 }
