@@ -53,19 +53,39 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                                     child: Image.network(
                                         "https://restaurant-api.dicoding.dev/images/medium/${detailRestaurant.detailRestaurantModel?.restaurant.pictureId}"),
                                   ),
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                        color: secondaryColor),
-                                    child: IconButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      icon: const Icon(
-                                        Icons.arrow_back,
-                                        color: primaryColor,
-                                        size: 30,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                            color: secondaryColor),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          icon: const Icon(
+                                            Icons.arrow_back,
+                                            color: primaryColor,
+                                            size: 30,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                        color: secondaryColor),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            print("Loved");
+                                          },
+                                          icon: const Icon(
+                                            Icons.favorite_border,
+                                            color: primaryColor,
+                                            size: 30,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

@@ -52,12 +52,9 @@ class _SearchRestaurantPageState extends State<SearchRestaurantPage> {
                     },
                     controller: _namaRestoController,
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(
-                        Icons.search_outlined,
-                        color: primaryColor,
-                      ),
                       border: InputBorder.none,
                       hintText: "Search",
+                      contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
                       suffixIcon: IconButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
