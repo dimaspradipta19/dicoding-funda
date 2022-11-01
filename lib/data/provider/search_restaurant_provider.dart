@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/data/service/search_restaurant_service.dart';
 import 'package:dicoding_restaurant_app/models/search_restaurant_model.dart';
 import 'package:flutter/cupertino.dart';
