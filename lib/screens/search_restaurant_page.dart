@@ -7,6 +7,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import '../common/internet_not_connected.dart';
 import '../common/styles.dart';
+import '../utils/result_state.dart';
 
 class SearchRestaurantPage extends StatefulWidget {
   const SearchRestaurantPage({super.key});

@@ -1,11 +1,11 @@
 import 'package:dicoding_restaurant_app/common/styles.dart';
 import 'package:dicoding_restaurant_app/data/provider/detail_restaurant_provider.dart';
-import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
 import '../common/internet_not_connected.dart';
+import '../utils/result_state.dart';
 
 class DetailRestaurant extends StatefulWidget {
   const DetailRestaurant({
@@ -66,20 +66,6 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                                           },
                                           icon: const Icon(
                                             Icons.arrow_back,
-                                            color: primaryColor,
-                                            size: 30,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                        color: secondaryColor),
-                                        child: IconButton(
-                                          onPressed: () {
-                                            print("Loved");
-                                          },
-                                          icon: const Icon(
-                                            Icons.favorite_border,
                                             color: primaryColor,
                                             size: 30,
                                           ),

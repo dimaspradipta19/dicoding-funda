@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
+import '../utils/result_state.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
