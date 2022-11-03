@@ -38,16 +38,16 @@ import 'package:http/http.dart' as http;
 void main() {
   test('memparsing json ke restaurant model', () {
     const id = "abcdefghijklmnopqrs";
-    const name = "Mama Mia";
-    const description = "Ini adalah restoran milik Mama Mia";
+    const name = "Dim Dum Restaurant Italiano";
+    const description = "Ini adalah restoran Italia terbesar ke 2";
     const pictureId = "12";
     const city = "Bekasi";
     const double rating = 4.8;
 
     final json = {
       "id": "abcdefghijklmnopqrs",
-      "name": "Mama Mia",
-      "description": "Ini adalah restoran milik Mama Mia",
+      "name": "Dim Dum Restaurant Italiano",
+      "description": "Ini adalah restoran Italia terbesar ke 2",
       "pictureId": "12",
       "city": "Bekasi",
       "rating": 4.8
