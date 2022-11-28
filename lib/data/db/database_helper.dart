@@ -35,10 +35,12 @@ class DatabaseHelper {
   }
 
   Future<Database?> get database async {
+    _database ??= await _initializeDb();
+    /*
     if (_database == null) {
-      _database = await _initializeDb();
-    }
-
+          _database = await _initializeDb();
+        }
+    */
     return _database;
   }
 
@@ -71,12 +73,12 @@ class DatabaseHelper {
   }
 
   Future<void> removeFavorite(String id) async {
-  final db = await database;
- 
-  await db!.delete(
-    _tblFavorite,
-    where: 'id = ?',
-    whereArgs: [id],
-  );
-}
+    final db = await database;
+
+    await db!.delete(
+      _tblFavorite,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

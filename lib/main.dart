@@ -5,6 +5,7 @@ import 'package:dicoding_restaurant_app/data/preferences/preferences_helper.dart
 import 'package:dicoding_restaurant_app/data/provider/detail_restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/preferences_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:dicoding_restaurant_app/data/provider/review_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/scheduling_provider.dart';
 import 'package:dicoding_restaurant_app/data/provider/search_restaurant_provider.dart';
 import 'package:dicoding_restaurant_app/screens/splash_page.dart';
@@ -62,6 +63,9 @@ class MyApp extends StatelessWidget {
           create: (_) => DatabaseProvider(
             databaseHelper: DatabaseHelper(),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ReviewProvider(),
         ),
       ],
       child: StreamProvider<InternetConnectionStatus>(

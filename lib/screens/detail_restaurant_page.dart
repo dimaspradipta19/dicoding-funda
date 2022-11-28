@@ -1,5 +1,6 @@
 import 'package:dicoding_restaurant_app/common/styles.dart';
 import 'package:dicoding_restaurant_app/data/provider/detail_restaurant_provider.dart';
+import 'package:dicoding_restaurant_app/screens/review_page.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
@@ -299,40 +300,40 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                                           return Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Container(
-                                                width: 300,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey[300],
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      12.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        "Nama : ${detailRestaurant.detailRestaurantModel!.restaurant.customerReviews[index].name}",
-                                                        style: myTextTheme
-                                                            .bodyLarge,
+                                              width: 300,
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[300],
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Nama : ${detailRestaurant.detailRestaurantModel!.restaurant.customerReviews[index].name}",
+                                                      style:
+                                                          myTextTheme.bodyLarge,
+                                                    ),
+                                                    Text(
+                                                        "Tanggal: ${detailRestaurant.detailRestaurantModel!.restaurant.customerReviews[index].date}"),
+                                                    Expanded(
+                                                      child: Text(
+                                                        detailRestaurant
+                                                            .detailRestaurantModel!
+                                                            .restaurant
+                                                            .customerReviews[
+                                                                index]
+                                                            .review,
                                                       ),
-                                                      Text(detailRestaurant
-                                                          .detailRestaurantModel!
-                                                          .restaurant
-                                                          .customerReviews[
-                                                              index]
-                                                          .date),
-                                                      Text(detailRestaurant
-                                                          .detailRestaurantModel!
-                                                          .restaurant
-                                                          .customerReviews[
-                                                              index]
-                                                          .review),
-                                                    ],
-                                                  ),
-                                                )),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
                                           );
                                         },
                                       ),
@@ -365,9 +366,15 @@ class _DetailRestaurantState extends State<DetailRestaurant> {
                   backgroundColor: whiteColor,
                   side: const BorderSide(color: primaryColor),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return  ReviewPage(idRestaurant: widget.idResto,);
+                    },
+                  ));
+                },
                 child: Text(
-                  "PESAN SEKARANG",
+                  "REVIEW RESTAURANT",
                   style: myTextTheme.button!.copyWith(color: primaryColor),
                 ),
               ),

@@ -42,42 +42,6 @@ class NotificationHelper {
     });
   }
 
-  /*
-Future<void> showNotification(
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      List<Restaurant>? listRestos) async {
-    var channelId = "1";
-    var channelName = "channel_01";
-    var channelDescription = "Resto Notification";
-    final _random = Random();
-
-    //  // get Dog's Breed List
-    var restoList = await RestaurantService().getListRestaurant();
-
-    var randomIndex = Random().nextInt(restoList!.length);
-
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        channelId, channelName,
-        channelDescription: channelDescription,
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: 'ticker',
-        styleInformation: const DefaultStyleInformation(true, true));
-
-    var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
-
-    var titleNotification = "<b>Wanna see some restaurant? see this</b>";
-    var titleResto = listRestos![randomIndex].name;
-
-    await flutterLocalNotificationsPlugin.show(
-        0, titleNotification, titleResto, platformChannelSpecifics,
-        payload: json.encode(listRestos));
-  }
-  */
-
   Future<void> showNotification(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
       List<Restaurant>? listRestos) async {

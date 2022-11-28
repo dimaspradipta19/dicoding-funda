@@ -13,7 +13,7 @@ class DetailRestaurantService {
           .get(Uri.parse("https://restaurant-api.dicoding.dev/detail/$id"));
 
       if (response.statusCode == 200) {
-        Map<String, dynamic> decodeData = jsonDecode(response.body);
+          Map<String, dynamic> decodeData = jsonDecode(response.body);
         result = DetailRestaurantModel.fromJson(decodeData);
         return result;
       } else {

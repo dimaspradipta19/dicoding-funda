@@ -1,10 +1,10 @@
-import 'package:dicoding_restaurant_app/data/service/restaurant_service.dart';
+// import 'package:dicoding_restaurant_app/data/service/restaurant_service.dart';
 import 'package:test/test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:mockito/annotations.dart';
-import 'restaurant_provider_test.mocks.dart';
+// import 'package:mockito/mockito.dart';
+// import 'package:mockito/annotations.dart';
+// import 'restaurant_provider_test.mocks.dart';
 import 'package:dicoding_restaurant_app/models/list_restaurant_model.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 // @GenerateMocks([RestaurantService])
 // void main() {
