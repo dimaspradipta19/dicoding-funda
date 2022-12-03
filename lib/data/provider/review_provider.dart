@@ -23,6 +23,8 @@ class ReviewProvider with ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
+
+      // ignore: avoid_print
       print(e.toString());
       rethrow;
     }

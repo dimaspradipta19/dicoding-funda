@@ -19,7 +19,6 @@ class _ReviewPageState extends State<ReviewPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _namaController.dispose();
     _reviewController.dispose();
@@ -60,11 +59,12 @@ class _ReviewPageState extends State<ReviewPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () async {
+              onPressed: () {
                 reviewProvider.review(widget.idRestaurant, _namaController.text,
                     _reviewController.text);
 
-                Navigator.pop(context);
+                    Navigator.pop(context);
+
               },
               child: const Text("Input Review"),
             ),

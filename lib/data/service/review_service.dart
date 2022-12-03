@@ -28,6 +28,7 @@ class ReviewService {
         throw Exception("Failed to load");
       }
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
       return null;
     }
